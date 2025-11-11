@@ -1,13 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trivia Musical</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎵 Trivia Musical</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      color: #1DB954;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #1DB954;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #game {
+      display: none;
+      text-align: center;
+    }
+    #genres {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <div id="app"></div>
+  <h1>🎵 Trivia Musical</h1>
+  <div id="login">
+    <button id="loginBtn">Conectar con Spotify</button>
+  </div>
+
+  <div id="game">
+    <h2>Elige un género</h2>
+    <div id="genres">
+      <button class="genre-btn" data-genre="rock">Rock</button>
+      <button class="genre-btn" data-genre="pop">Pop</button>
+      <button class="genre-btn" data-genre="reggaeton">Reggaeton</button>
+      <button class="genre-btn" data-genre="electrónica">Electrónica</button>
+    </div>
+
+    <h3 id="question"></h3>
+    <audio id="audio" controls></audio>
+    <p id="result"></p>
+  </div>
 
   <script src="script.js"></script>
 </body>
