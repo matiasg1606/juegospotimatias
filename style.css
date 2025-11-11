@@ -1,0 +1,27 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #121212;
+  color: white;
+  margin: 0;
+  padding: 40px;
+}
+
+button, a {
+  background: #1db954;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+button:hover, a:hover {
+  background: #1ed760;
+}
+
+audio {
+  margin-top: 20px;
+}
