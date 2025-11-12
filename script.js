@@ -2,17 +2,22 @@
 // 🎵 Trivia Musical con Spotify API (Netlify backend)
 // =========================
 
-const API_URL = "https://juegospotimatias.netlify.app/.netlify/functions/getSpotifyToken"; // URL de tu función Netlify
+const API_URL = "https://brilliant-bombolone-b74588.netlify.app/.netlify/functions/getSpotifyToken";
 let spotifyToken = null;
 
 // --------------------------
 // 1️⃣ Obtener token automáticamente desde el backend
 // --------------------------
 async function obtenerToken() {
-  const res = await fetch(API_URL);
-  const data = await res.json();
-  spotifyToken = data.access_token;
-  console.log("✅ Token obtenido desde Netlify:", spotifyToken);
+  try {
+    const res = await fetch(API_URL);
+    const data = await res.json();
+    spotifyToken = data.access_token;
+    console.log("✅ Token obtenido desde Netlify:", spotifyToken);
+  } catch (err) {
+    console.error("Error al obtener token:", err);
+    alert("No se pudo obtener token de Spotify. Revisa Netlify.");
+  }
 }
 
 // --------------------------
@@ -20,6 +25,11 @@ async function obtenerToken() {
 // --------------------------
 function renderPantallaInicial() {
   const app = document.getElementById("app");
+  if (!app) {
+    console.error("No se encontró el div con id='app'");
+    return;
+  }
+
   app.innerHTML = `
     <div class="pantalla">
       <h1>🎵 Adivina la Canción</h1>
@@ -107,4 +117,3 @@ async function buscarCanciones(tema) {
   await obtenerToken();
   renderPantallaInicial();
 })();
-
