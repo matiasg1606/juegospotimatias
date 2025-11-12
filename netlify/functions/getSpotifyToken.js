@@ -1,5 +1,4 @@
 // netlify/functions/getSpotifyToken.js
-import fetch from 'node-fetch';
 
 export async function handler() {
   const clientId = process.env.SPOTIFY_CLIENT_ID;
@@ -18,6 +17,7 @@ export async function handler() {
     });
 
     const data = await response.json();
+
     return {
       statusCode: 200,
       body: JSON.stringify(data)
