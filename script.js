@@ -6,6 +6,17 @@ const API_URL = "https://brilliant-bombolone-b74588.netlify.app/.netlify/functio
 let spotifyToken = null;
 
 // --------------------------
+// Mapear temas a búsquedas de Spotify
+// --------------------------
+const temaBusqueda = {
+  pop: "pop",
+  rock: "rock",
+  latino: "reggaeton OR bachata OR salsa OR merengue",
+  rap: "rap OR hip hop",
+  electronic: "electronic OR edm OR house"
+};
+
+// --------------------------
 // 1️⃣ Obtener token automáticamente desde el backend
 // --------------------------
 async function obtenerToken() {
@@ -71,7 +82,7 @@ async function renderTrivia(tema) {
   const app = document.getElementById("app");
   app.innerHTML = `<h2>Cargando canciones de ${tema}...</h2>`;
 
-  const canciones = await buscarCanciones(tema);
+  const canciones = await buscarCanciones(temaBusqueda[tema]);
 
   if (!canciones || canciones.length === 0) {
     app.innerHTML = `<p>No se encontraron canciones de ${tema} 😢</p>`;
@@ -97,9 +108,9 @@ async function renderTrivia(tema) {
 // --------------------------
 // 5️⃣ Función que busca canciones por tema
 // --------------------------
-async function buscarCanciones(tema) {
+async function buscarCanciones(query) {
   try {
-    const res = await fetch(`https://api.spotify.com/v1/search?q=${tema}&type=track&limit=10`, {
+    const res = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=10`, {
       headers: { Authorization: `Bearer ${spotifyToken}` }
     });
     const data = await res.json();
